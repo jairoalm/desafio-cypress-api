@@ -22,7 +22,6 @@ describe("Testes da API de Usuários", () => {
             expect(res.body.usuarios[0]).to.have.property("password");
             expect(res.body.usuarios[0]).to.have.property("administrador");
             expect(res.body.usuarios[0]).to.have.property("_id");
-
         });
     });
     it("Deve buscar o usuário criado pelo nome", () => {
@@ -68,21 +67,21 @@ describe("Testes da API de Usuários", () => {
             expect(res.body.usuarios[0]).to.have.property("_id");
         });
     });
-    it.only("Buscar o usuário pelo nome inválido", () => {
+    it("Buscar o usuário pelo nome inválido", () => {
         cy.buscarUser({ nome: "false" }).then((res) => {
             expect(res.status).to.eq(200);
             expect(res.body.quantidade).to.have.eq(0);  
             expect(res.body.usuarios).to.be.an('array').that.is.empty;
         });
     });
-    it.only("Buscar o usuário pelo email inválido", () => {
+    it("Buscar o usuário pelo email inválido", () => {
         cy.buscarUser({ email: "false@false.com" }).then((res) => {
             expect(res.status).to.eq(200);
             expect(res.body.quantidade).to.have.eq(0);  
             expect(res.body.usuarios).to.be.an('array').that.is.empty;
         });
     });
-    it.only("Buscar o usuário pelo password inválida", () => {
+    it("Buscar o usuário pelo password inválida", () => {
         cy.buscarUser({ password: "@@##!!@@##_++" }).then((res) => {
             expect(res.status).to.eq(200);
             expect(res.body.quantidade).to.have.eq(0);  
@@ -90,11 +89,9 @@ describe("Testes da API de Usuários", () => {
         });
     });
 
-    it.only("Buscar o usuário pelo administrador inválido", () => {
+    it("Buscar o usuário pelo administrador inválido", () => {
         cy.buscarUser({ administrador: "verdadeiro" }).then((res) => {
-            expect(res.status).to.eq(200);
-            expect(res.body.quantidade).to.have.eq(0);  
-            expect(res.body.usuarios).to.be.an('array').that.is.empty;
+            expect(res.status).to.eq(400);
         });
     });
 })
