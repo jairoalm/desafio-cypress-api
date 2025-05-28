@@ -7,10 +7,12 @@ describe("Testes da API de Usuários", () => {
   it("Deve criar um novo usuário", () => {
     cy.createUser().then((res) => {
       user = res;
+      const userId = user.body._id;
+      console.log(userId)
       expect(user.status).to.eql(201);
       expect(user.body).to.have.property("message");
       expect(user.body).to.have.property("_id");
-      expect(user.body.message).to.include('Cadastro realizado com sucesso');
+      expect(user.body.message).to.include('Cadastro realizado com sucesso');      
     });
   });
   it("Não deve permitir criar usuário com nome vazio", () => {
