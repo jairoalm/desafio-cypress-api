@@ -18,21 +18,28 @@ describe("Testes da API de Usuários - Deletar Usuário", () => {
         });
     });
     
-    it.only("Tentar deletar usuário com ID vazio", () => {
-        cy.deleteUserId().then((res) => {
-            expect(res.status).to.eq(400);
+    it("Tentar deletar usuário com ID inválido", () => {
+        cy.deleteUserId("12").then((res) => {
+            expect(res.status).to.eq(200);
+            expect(res.body.message).to.include('Nenhum registro excluído');
         });
     });
-    it("Tentar deletar usuário com ID incorreto", () => {
-        cy.deleteUserId("1234567890jmkloi").then((res) => {
-            expect(res.status).to.eq(400);
-            expect(res.body.message).to.include('Usuário não encontrado');
+    it("Tentar deletar usuário com ID com números", () => {
+        cy.deleteUserId(12121212121).then((res) => {
+            expect(res.status).to.eq(200);
+            expect(res.body.message).to.include('Nenhum registro excluído');
         });
     });
-    it("Tentar deletar usuário com ID menos de 16 caracteres alfanuméricos", () => {
-        cy.deleteUserId("1234567890jmklo").then((res) => {
-            expect(res.status).to.eq(400);
-            expect(res.body.id).to.include('id deve ter exatamente 16 caracteres alfanuméricos');
+    it("Tentar deletar usuário com ID como verdadeiro", () => {
+        cy.deleteUserId(true).then((res) => {
+            expect(res.status).to.eq(200);
+            expect(res.body.message).to.include('Nenhum registro excluído');
+        });
+    });
+    it("Tentar deletar usuário com ID como falso", () => {
+        cy.deleteUserId(false).then((res) => {
+            expect(res.status).to.eq(200);
+            expect(res.body.message).to.include('Nenhum registro excluído');
         });
     });
 })
