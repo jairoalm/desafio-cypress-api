@@ -1,6 +1,7 @@
 {
   "name": "desafio-api-test",
   "version": "1.0.0",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "cy:open": "cypress open",
@@ -13,7 +14,8 @@
   "description": "",
   "devDependencies": {
     "@faker-js/faker": "^9.8.0",
-    "cypress": "^14.4.0",
-    "cypress-mochawesome-reporter": "^3.8.2"
+    "allure-commandline": "^2.34.0",
+    "allure-cypress": "^3.2.2",
+    "cypress": "^14.4.0"
   }
 }

@@ -17,7 +17,7 @@ describe("Testes da API de Usuários - Deletar Usuário", () => {
             expect(res.body.message).to.include('Registro excluído com sucesso');
         });
     });
-    
+
     it("Tentar deletar usuário com ID inválido", () => {
         cy.deleteUserId("12").then((res) => {
             expect(res.status).to.eq(200);
@@ -42,4 +42,14 @@ describe("Testes da API de Usuários - Deletar Usuário", () => {
             expect(res.body.message).to.include('Nenhum registro excluído');
         });
     });
+    // it.only("Tentar deletar usuário que tenha produto no carrinho", () => {
+    //     cy.criarProduto();
+    //     cy.deleteUserId(user.id).then((res) => {
+    //         user = res
+    //         expect(user.status).to.eql(400);
+    //         expect(user.body).to.have.property("message");
+    //         expect(user.body.message).to.include('Não é permitido excluir produto que faz parte de carrinho');
+    //     });
+    // })
+   
 })

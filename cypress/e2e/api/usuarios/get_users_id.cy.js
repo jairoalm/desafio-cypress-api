@@ -1,6 +1,4 @@
 // cypress/e2e/api/users.cy.js
-import { faker } from '@faker-js/faker';
-
 describe("Testes da API de Usuários", () => {
     let user = {};
     before(() => {
