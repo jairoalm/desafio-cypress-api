@@ -12,7 +12,7 @@ describe("Testes da API de Usuários", () => {
       expect(user.status).to.eql(201);
       expect(user.body).to.have.property("message");
       expect(user.body).to.have.property("_id");
-      expect(user.body.message).to.include('Cadastro realizado com sucesso');      
+      expect(user.body.message).to.include('Cadastro realizado com sucesso');
     });
   });
   it("Não deve permitir criar usuário com nome vazio", () => {
@@ -71,7 +71,7 @@ describe("Testes da API de Usuários", () => {
       expect(user.body.email).to.include("email deve ser um email válido"); // ou a mensagem correta da API
     });
   });
-   it("Não deve permitir criar usuário com email sem @", () => {
+  it("Não deve permitir criar usuário com email sem @", () => {
     cy.createUser({ email: "tetete#teste.com" }).then((res) => {
       user = res;
       expect(user.status).to.eql(400); // ou o status retornado pela sua API
@@ -135,7 +135,7 @@ describe("Testes da API de Usuários", () => {
       expect(user.body.email).to.include("email deve ser uma string"); // ou a mensagem correta da API
     });
   });
-   it("Não deve permitir criar usuário com email usando boolean = false", () => {
+  it("Não deve permitir criar usuário com email usando boolean = false", () => {
     cy.createUser({ email: false }).then((res) => {
       user = res;
       expect(user.status).to.eql(400); // ou o status retornado pela sua API
@@ -159,7 +159,7 @@ describe("Testes da API de Usuários", () => {
       expect(user.body.password).to.include("password deve ser uma string"); // ou a mensagem correta da API
     });
   });
-   it("Não deve permitir criar usuário com password usando boolean = false", () => {
+  it("Não deve permitir criar usuário com password usando boolean = false", () => {
     cy.createUser({ password: false }).then((res) => {
       user = res;
       expect(user.status).to.eql(400); // ou o status retornado pela sua API
@@ -183,7 +183,7 @@ describe("Testes da API de Usuários", () => {
       expect(user.body.administrador).to.include("administrador deve ser 'true' ou 'false'"); // ou a mensagem correta da API
     });
   });
-   it("Não deve permitir criar usuário com administrador usando boolean = false", () => {
+  it("Não deve permitir criar usuário com administrador usando boolean = false", () => {
     cy.createUser({ administrador: false }).then((res) => {
       user = res;
       expect(user.status).to.eql(400); // ou o status retornado pela sua API

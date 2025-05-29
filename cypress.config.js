@@ -1,19 +1,15 @@
-const { defineConfig } = require("cypress");
+// const { defineConfig } = require("cypress");
+import { defineConfig } from "cypress";
+import { allureCypress } from "allure-cypress/reporter";
 
-module.exports = defineConfig({
-  reporter : 'cypress-mochawesome-reporter' ,
-  reporterOptions : { 
-    charts : true , 
-    reportPageTitle : 'custom-title' , 
-    embeddedScreenshots : true , 
-    inlineAssets : true , 
-    saveAllAttempts : false , 
-  } , 
+export default defineConfig({
   e2e: {
     baseUrl: 'https://serverest.dev',
-    supportFile: 'cypress/support/e2e.js',
     setupNodeEvents(on, config) {
-      require ( 'cypress-mochawesome-reporter/plugin' )( on ) ; 
+      allureCypress(on, config, {
+        resultsDir: "allure-results", // Define o diretório para os resultados do Allure
+      });
+      return config; 
     },
   },
 });
