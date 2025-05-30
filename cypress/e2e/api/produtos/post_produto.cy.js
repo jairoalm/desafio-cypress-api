@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 
 describe("Testes da API de Produtos", () => {
-    let user;
+    let produto;
     before(() => {
         cy.createUser().then((res) => {
             const { email, password } = res.requestBody;
@@ -11,54 +11,54 @@ describe("Testes da API de Produtos", () => {
 
     it("Deve criar um novo produto", () => {
         cy.createProduct().then((res) => {
-            user = res;
-            user.id = res.body._id;
-            expect(user.status).to.eql(201);
-            expect(user.body).to.have.property("message");
-            expect(user.body).to.have.property("_id");
-            expect(user.body.message).to.include('Cadastro realizado com sucesso');
+            produto = res;
+            produto.id = res.body._id;
+            expect(produto.status).to.eql(201);
+            expect(produto.body).to.have.property("message");
+            expect(produto.body).to.have.property("_id");
+            expect(produto.body.message).to.include('Cadastro realizado com sucesso');
         });
     });
     it("Tentar criar um novo produto com nome vazio", () => {
         cy.createProduct({ nome: "" }).then((res) => {
-            user = res;
-            expect(user.status).to.eql(400);
-            expect(user.body.nome).to.include('nome não pode ficar em branco');
+            produto = res;
+            expect(produto.status).to.eql(400);
+            expect(produto.body.nome).to.include('nome não pode ficar em branco');
         });
     });
     it("Tentar criar um novo produto com preco vazio", () => {
         cy.createProduct({ preco: null }).then((res) => {
-            user = res;
-            expect(user.status).to.eql(400);
-            expect(user.body.preco).to.include('preco deve ser um número');
+            produto = res;
+            expect(produto.status).to.eql(400);
+            expect(produto.body.preco).to.include('preco deve ser um número');
         });
     });
     it("Tentar criar um novo produto com descricao vazio", () => {
         cy.createProduct({ descricao: "" }).then((res) => {
-            user = res;
-            expect(user.status).to.eql(400);
-            expect(user.body.descricao).to.include('descricao não pode ficar em branco');
+            produto = res;
+            expect(produto.status).to.eql(400);
+            expect(produto.body.descricao).to.include('descricao não pode ficar em branco');
         });
     });
     it("Tentar criar um novo produto com quantidade vazio", () => {
         cy.createProduct({ quantidade: null }).then((res) => {
-            user = res;
-            expect(user.status).to.eql(400);
-            expect(user.body.quantidade).to.include('quantidade deve ser um número');
+            produto = res;
+            expect(produto.status).to.eql(400);
+            expect(produto.body.quantidade).to.include('quantidade deve ser um número');
         });
     });
      it("Tentar criar um novo produto que o preco tenha casas décimais 13.6", () => {
         cy.createProduct({ preco: 75.63 }).then((res) => {
-            user = res;
-            expect(user.status).to.eql(400);
-            expect(user.body.preco).to.include('preco deve ser um inteiro');
+            produto = res;
+            expect(produto.status).to.eql(400);
+            expect(produto.body.preco).to.include('preco deve ser um inteiro');
         });
     });
     it("Tentar criar um novo produto que a quantidade tenha casas décimais 13.6", () => {
         cy.createProduct({ quantidade: 75.63 }).then((res) => {
-            user = res;
-            expect(user.status).to.eql(400);
-            expect(user.body.quantidade).to.include('quantidade deve ser um inteiro');
+            produto = res;
+            expect(produto.status).to.eql(400);
+            expect(produto.body.quantidade).to.include('quantidade deve ser um inteiro');
         });
     });
     it("Tentar criar produto com nome existente", () => {
@@ -67,9 +67,9 @@ describe("Testes da API de Produtos", () => {
             expect(res.status).to.eql(201);
 
             cy.createProduct({ nome: produtoRepetido }).then((res) => {
-                user = res;
-                expect(user.status).to.eql(400);
-                expect(user.body.message).to.include('Já existe produto com esse nome');
+                produto = res;
+                expect(produto.status).to.eql(400);
+                expect(produto.body.message).to.include('Já existe produto com esse nome');
             });
         })
     });

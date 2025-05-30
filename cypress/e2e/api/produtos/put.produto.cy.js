@@ -3,7 +3,6 @@ import { faker } from '@faker-js/faker';
 
 describe("Testes da API de Usuários -> Editar Usuário", () => {
     let produto = {};
-    let user = {}
     before(() => {
         cy.createUser().then((res) => {
             const { email, password } = res.requestBody;
@@ -15,11 +14,6 @@ describe("Testes da API de Usuários -> Editar Usuário", () => {
             produto.preco = res.requestBody.preco;
             produto.descricao = res.requestBody.descricao;
             produto.quantidade = res.requestBody.quantidade;
-            cy.log(produto.id)
-            cy.log(produto)
-            cy.log(produto.preco)
-            cy.log(produto.descricao)
-            cy.log(produto.quantidade)
         });
     });
     it("Deve atualizar apenas o nome do produto", () => {
@@ -45,7 +39,7 @@ describe("Testes da API de Usuários -> Editar Usuário", () => {
         cy.log(novaDescricao)
         cy.updateProdutoId(produto.id, { descricao: novaDescricao }).then((res) => {
             cy.log(novaDescricao)
-            // expect(res.status).to.eq(200);
+            expect(res.status).to.eq(200);
             expect(res.body.message).to.include("Registro alterado com sucesso");
         });
     });
@@ -60,46 +54,46 @@ describe("Testes da API de Usuários -> Editar Usuário", () => {
     });
     it("Tentar editar produto com nome vazio", () => {
         cy.updateProdutoId(produto.id, { nome: "" }).then((res) => {
-            user = res;
-            expect(user.status).to.eql(400);
-            expect(user.body.nome).to.include('nome não pode ficar em branco');
+            produto = res;
+            expect(produto.status).to.eql(400);
+            expect(produto.body.nome).to.include('nome não pode ficar em branco');
         });
     });
     it("Tentar editar produto com preço vazio", () => {
         cy.updateProdutoId(produto.id, { preco: null }).then((res) => {
-            user = res;
-            expect(user.status).to.eql(400);
-            expect(user.body.preco).to.include('preco deve ser um número');
+            produto = res;
+            expect(produto.status).to.eql(400);
+            expect(produto.body.preco).to.include('preco deve ser um número');
         });
     });
     it("Tentar editar produto com descrição vazia", () => {
         cy.updateProdutoId(produto.id, { descricao: "" }).then((res) => {
-            user = res;
-            expect(user.status).to.eql(400);
-            expect(user.body.descricao).to.include('descricao não pode ficar em branco');
+            produto = res;
+            expect(produto.status).to.eql(400);
+            expect(produto.body.descricao).to.include('descricao não pode ficar em branco');
         });
     });
     it("Tentar editar produto com quantidade vazia", () => {
         cy.updateProdutoId(produto.id, { quantidade: null }).then((res) => {
-            user = res;
-            expect(user.status).to.eql(400);
-            expect(user.body.quantidade).to.include('quantidade deve ser um número');
+            produto = res;
+            expect(produto.status).to.eql(400);
+            expect(produto.body.quantidade).to.include('quantidade deve ser um número');
         });
     });
     it("Tentar editar um novo produto que o preco tenha casas décimais 13.6", () => {
         const editarPreco = 132.23
         cy.createProduct({ preco: editarPreco }).then((res) => {
-            user = res;
-            expect(user.status).to.eql(400);
-            expect(user.body.preco).to.include('preco deve ser um inteiro');
+            produto = res;
+            expect(produto.status).to.eql(400);
+            expect(produto.body.preco).to.include('preco deve ser um inteiro');
         });
     });
     it("Tentar editar um novo produto que a quantidade tenha casas décimais 13.6", () => {
         const editarQuantidade = 132.23
         cy.createProduct({ quantidade: editarQuantidade }).then((res) => {
-            user = res;
-            expect(user.status).to.eql(400);
-            expect(user.body.quantidade).to.include('quantidade deve ser um inteiro');
+            produto = res;
+            expect(produto.status).to.eql(400);
+            expect(produto.body.quantidade).to.include('quantidade deve ser um inteiro');
         });
     });
     it("Deve falhar ao editar produto com token inválido", () => {

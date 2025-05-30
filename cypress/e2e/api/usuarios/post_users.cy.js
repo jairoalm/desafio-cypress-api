@@ -43,12 +43,11 @@ describe("Testes da API de Usuários", () => {
     cy.createUser({ administrador: "" }).then((res) => {
       console.log(res)
       user = res;
-      expect(user.status).to.eql(400); // ou o status retornado pela sua API
+      expect(user.status).to.eql(400);
       expect(user.body).to.have.property("administrador");
-      expect(user.body.administrador).to.include("administrador deve ser 'true' ou 'false'"); // ou a mensagem correta da API
+      expect(user.body.administrador).to.include("administrador deve ser 'true' ou 'false'");
     });
   });
-
   it("Não deve permitir cadastrar um usuário com email já existente", () => {
     const emailRepetido = faker.internet.email();
 
@@ -58,137 +57,137 @@ describe("Testes da API de Usuários", () => {
 
       // Tenta criar novamente com o mesmo e-mail
       cy.createUser({ email: emailRepetido }).then((res2) => {
-        expect(res2.status).to.eql(400); // ou 409, dependendo da API
-        expect(res2.body.message).to.include("Este email já está sendo usado"); // ou a mensagem correta da sua API
+        expect(res2.status).to.eql(400);
+        expect(res2.body.message).to.include("Este email já está sendo usado");
       });
     });
   })
   it("Não deve permitir criar usuário com email o formato fora do padrão", () => {
     cy.createUser({ email: "@teste.com" }).then((res) => {
       user = res;
-      expect(user.status).to.eql(400); // ou o status retornado pela sua API
+      expect(user.status).to.eql(400);
       expect(user.body).to.have.property("email");
-      expect(user.body.email).to.include("email deve ser um email válido"); // ou a mensagem correta da API
+      expect(user.body.email).to.include("email deve ser um email válido");
     });
   });
   it("Não deve permitir criar usuário com email sem @", () => {
     cy.createUser({ email: "tetete#teste.com" }).then((res) => {
       user = res;
-      expect(user.status).to.eql(400); // ou o status retornado pela sua API
+      expect(user.status).to.eql(400);
       expect(user.body).to.have.property("email");
-      expect(user.body.email).to.include("email deve ser um email válido"); // ou a mensagem correta da API
+      expect(user.body.email).to.include("email deve ser um email válido");
     });
   });
   it("Não deve permitir criar usuário com email usando espaços", () => {
     cy.createUser({ email: "tetete @teste.com" }).then((res) => {
       user = res;
-      expect(user.status).to.eql(400); // ou o status retornado pela sua API
+      expect(user.status).to.eql(400);
       expect(user.body).to.have.property("email");
-      expect(user.body.email).to.include("email deve ser um email válido"); // ou a mensagem correta da API
+      expect(user.body.email).to.include("email deve ser um email válido");
     });
   });
   it("Não deve permitir criar usuário com email sem dominio", () => {
     cy.createUser({ email: "teste@" }).then((res) => {
       user = res;
-      expect(user.status).to.eql(400); // ou o status retornado pela sua API
+      expect(user.status).to.eql(400);
       expect(user.body).to.have.property("email");
-      expect(user.body.email).to.include("email deve ser um email válido"); // ou a mensagem correta da API
+      expect(user.body.email).to.include("email deve ser um email válido");
     });
   });
   it("Não deve permitir criar usuário com nome usando números", () => {
     cy.createUser({ nome: 12345 }).then((res) => {
       user = res;
-      expect(user.status).to.eql(400); // ou o status retornado pela sua API
+      expect(user.status).to.eql(400);
       expect(user.body).to.have.property("nome");
-      expect(user.body.nome).to.include("nome deve ser uma string"); // ou a mensagem correta da API
+      expect(user.body.nome).to.include("nome deve ser uma string");
     });
   });
   it("Não deve permitir criar usuário com nome usando boolean = true", () => {
     cy.createUser({ nome: true }).then((res) => {
       user = res;
-      expect(user.status).to.eql(400); // ou o status retornado pela sua API
+      expect(user.status).to.eql(400);
       expect(user.body).to.have.property("nome");
-      expect(user.body.nome).to.include("nome deve ser uma string"); // ou a mensagem correta da API
+      expect(user.body.nome).to.include("nome deve ser uma string");
     });
   });
   it("Não deve permitir criar usuário com nome usando boolean = false", () => {
     cy.createUser({ nome: false }).then((res) => {
       user = res;
-      expect(user.status).to.eql(400); // ou o status retornado pela sua API
+      expect(user.status).to.eql(400);
       expect(user.body).to.have.property("nome");
-      expect(user.body.nome).to.include("nome deve ser uma string"); // ou a mensagem correta da API
+      expect(user.body.nome).to.include("nome deve ser uma string");
     });
   });
   it("Não deve permitir criar usuário com email usando números", () => {
     cy.createUser({ email: 12345 }).then((res) => {
       user = res;
-      expect(user.status).to.eql(400); // ou o status retornado pela sua API
+      expect(user.status).to.eql(400);
       expect(user.body).to.have.property("email");
-      expect(user.body.email).to.include("email deve ser uma string"); // ou a mensagem correta da API
+      expect(user.body.email).to.include("email deve ser uma string");
     });
   });
   it("Não deve permitir criar usuário com email usando boolean = true", () => {
     cy.createUser({ email: true }).then((res) => {
       user = res;
-      expect(user.status).to.eql(400); // ou o status retornado pela sua API
+      expect(user.status).to.eql(400);
       expect(user.body).to.have.property("email");
-      expect(user.body.email).to.include("email deve ser uma string"); // ou a mensagem correta da API
+      expect(user.body.email).to.include("email deve ser uma string");
     });
   });
   it("Não deve permitir criar usuário com email usando boolean = false", () => {
     cy.createUser({ email: false }).then((res) => {
       user = res;
-      expect(user.status).to.eql(400); // ou o status retornado pela sua API
+      expect(user.status).to.eql(400);
       expect(user.body).to.have.property("email");
-      expect(user.body.email).to.include("email deve ser uma string"); // ou a mensagem correta da API
+      expect(user.body.email).to.include("email deve ser uma string");
     });
   });
   it("Não deve permitir criar usuário com password usando números", () => {
     cy.createUser({ password: 12345 }).then((res) => {
       user = res;
-      expect(user.status).to.eql(400); // ou o status retornado pela sua API
+      expect(user.status).to.eql(400);
       expect(user.body).to.have.property("password");
-      expect(user.body.password).to.include("password deve ser uma string"); // ou a mensagem correta da API
+      expect(user.body.password).to.include("password deve ser uma string");
     });
   });
   it("Não deve permitir criar usuário com password usando boolean = true", () => {
     cy.createUser({ password: true }).then((res) => {
       user = res;
-      expect(user.status).to.eql(400); // ou o status retornado pela sua API
+      expect(user.status).to.eql(400);
       expect(user.body).to.have.property("password");
-      expect(user.body.password).to.include("password deve ser uma string"); // ou a mensagem correta da API
+      expect(user.body.password).to.include("password deve ser uma string");
     });
   });
   it("Não deve permitir criar usuário com password usando boolean = false", () => {
     cy.createUser({ password: false }).then((res) => {
       user = res;
-      expect(user.status).to.eql(400); // ou o status retornado pela sua API
+      expect(user.status).to.eql(400);
       expect(user.body).to.have.property("password");
-      expect(user.body.password).to.include("password deve ser uma string"); // ou a mensagem correta da API
+      expect(user.body.password).to.include("password deve ser uma string");
     });
   });
   it("Não deve permitir criar usuário com administrador usando números", () => {
     cy.createUser({ administrador: 12345 }).then((res) => {
       user = res;
-      expect(user.status).to.eql(400); // ou o status retornado pela sua API
+      expect(user.status).to.eql(400);
       expect(user.body).to.have.property("administrador");
-      expect(user.body.administrador).to.include("administrador deve ser 'true' ou 'false'"); // ou a mensagem correta da API
+      expect(user.body.administrador).to.include("administrador deve ser 'true' ou 'false'");
     });
   });
   it("Não deve permitir criar usuário com administrador usando boolean = true", () => {
     cy.createUser({ administrador: true }).then((res) => {
       user = res;
-      expect(user.status).to.eql(400); // ou o status retornado pela sua API
+      expect(user.status).to.eql(400);
       expect(user.body).to.have.property("administrador");
-      expect(user.body.administrador).to.include("administrador deve ser 'true' ou 'false'"); // ou a mensagem correta da API
+      expect(user.body.administrador).to.include("administrador deve ser 'true' ou 'false'");
     });
   });
   it("Não deve permitir criar usuário com administrador usando boolean = false", () => {
     cy.createUser({ administrador: false }).then((res) => {
       user = res;
-      expect(user.status).to.eql(400); // ou o status retornado pela sua API
+      expect(user.status).to.eql(400);
       expect(user.body).to.have.property("administrador");
-      expect(user.body.administrador).to.include("administrador deve ser 'true' ou 'false'"); // ou a mensagem correta da API
+      expect(user.body.administrador).to.include("administrador deve ser 'true' ou 'false'");
     });
   });
 })
