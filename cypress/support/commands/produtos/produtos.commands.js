@@ -1,4 +1,5 @@
 import { faker } from '@faker-js/faker';
+
 Cypress.Commands.add("createProduct", (override = {}) => {
     const defaultProduto = {
         nome: faker.commerce.productName(),
@@ -7,7 +8,6 @@ Cypress.Commands.add("createProduct", (override = {}) => {
         quantidade: 1,
         ...override
     };
-
     return cy.request({
         method: "POST",
         url: "/produtos",
@@ -81,3 +81,20 @@ Cypress.Commands.add("buscarProdutoId", (id) => {
         return res;
     });
 });
+Cypress.Commands.add("cadastrarNovoProduto", () => {
+    const produto = {}
+    return cy.createUser().then((res) => {
+        const { email, password } = res.requestBody;
+        return cy.loginApi(email, password).then(() => {
+            return cy.createProduct().then((resProd) => {
+                produto.id = resProd.body._id;
+                produto.nome = resProd.requestBody.nome;
+                produto.preco = resProd.requestBody.preco;
+                produto.descricao = resProd.requestBody.descricao;
+                produto.quantidade = resProd.requestBody.quantidade;
+
+                cy.wrap(produto).as("produto");
+            });
+        })
+    });
+})

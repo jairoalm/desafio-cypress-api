@@ -18,9 +18,6 @@ Cypress.Commands.add("requestInvalidToken", (method, url, expectedMessage) => {
     expect(res.body.message).to.include(expectedMessage);
   });
 });
-Cypress.Commands.add("validacaoStatusCode", (res, statusCode) => {
-    expect(res.status).to.eq(statusCode);
-})
 Cypress.Commands.add("criarProdutoComCarrinhoEExcluirUsuario", () => {
     let userId;
     let produtoId;
@@ -35,9 +32,8 @@ Cypress.Commands.add("criarProdutoComCarrinhoEExcluirUsuario", () => {
                 cy.log(produtoId)
                 return cy.requestAdicionarCarrinho(produtoId).then(() => {
                     return cy.deleteUserId(userId).then((resDelete) => {
-                        expect(resDelete.status).to.eql(400);
-                        expect(resDelete.body).to.have.property("message");
-                        expect(resDelete.body.message).to.include("Não é permitido excluir usuário com carrinho cadastrado");
+                        cy.validarCampoNoBody(resDelete, "message")
+                        cy.validarResposta(resDelete, 400, "message", "Não é permitido excluir usuário com carrinho cadastrado")
                     });
                 });
             });

@@ -67,3 +67,23 @@ Cypress.Commands.add("requestBuscaCarrinhoId", (id) => {
         return res;
     });
 });
+Cypress.Commands.add("criarUsuarioProdutoECarrinho", () => {
+    let contexto = {};
+    return cy.createUser().then((resUser) => {
+        contexto.userId = resUser.body._id;
+        const { email, password } = resUser.requestBody;
+        contexto.email = email;
+        contexto.password = password;
+        return cy.loginApi(email, password).then(() => {
+            cy.log("id_user", contexto.userId);
+            return cy.createProduct().then((resProd) => {
+                contexto.produtoId = resProd.body._id;
+                return cy.requestAdicionarCarrinho(contexto.produtoId).then((resCarrinho) => {
+                    contexto.carrinhoId = resCarrinho.body._id;
+                    cy.log("id_carrinho", contexto.carrinhoId);
+                    return cy.wrap(contexto);
+                });
+            });
+        });
+    });
+});

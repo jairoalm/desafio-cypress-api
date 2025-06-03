@@ -17,6 +17,13 @@ Cypress.Commands.add("loginApi", (email, password) => {
     });
 });
 
+Cypress.Commands.add("login", () => {
+    cy.createUser().then((res) => {
+        const { email, password } = res.requestBody;
+        cy.loginApi(email, password);
+    });
+});
+
 Cypress.Commands.add("loginUserCommon", () => {
     return cy.createUser({ administrador: "false" }).then((res) => {
         const { email, password } = res.requestBody;

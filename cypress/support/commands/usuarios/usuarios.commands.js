@@ -73,3 +73,16 @@ Cypress.Commands.add("deleteUserId", (id) => {
         return res;
     });
 });
+
+Cypress.Commands.add("cadastrarNovoUsuario", () => {
+    const user = {}
+    return cy.createUser().then((res) => {
+        user.id = res.body._id;
+        user.nome = res.requestBody.nome;
+        user.email = res.requestBody.email;
+        user.password = res.requestBody.password
+
+        cy.wrap(user).as("user");
+    });
+})
+

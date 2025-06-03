@@ -16,30 +16,29 @@ describe("Testes da API de Carrinhos - Realizar busca por carrinhos por ID", () 
                 cy.log("id_carrinho", carrinho.id)
             });
         });
+        cy.criarUsuarioProdutoECarrinho()
     });
     it("Deve listar o primeiro carrinho", () => {
         cy.requestBuscaCarrinhoId(carrinho.id).then((res) => {
             const carrinho = res.body.produtos[0]
-            expect(res.status).to.eq(200);  
+            cy.validarStatus(res, 200);
             expect(carrinho).to.have.property("idProduto");
             expect(carrinho).to.have.property("quantidade");
-            expect(carrinho).to.have.property("precoUnitario");   
-            expect(res.body).to.have.property("precoTotal");
-            expect(res.body).to.have.property("quantidadeTotal");
-            expect(res.body).to.have.property("idUsuario");
-            expect(res.body).to.have.property("_id");
+            expect(carrinho).to.have.property("precoUnitario");
+            cy.validarCampoNoBody(res, "precoTotal");
+            cy.validarCampoNoBody(res, "quantidadeTotal");
+            cy.validarCampoNoBody(res, "idUsuario");
+            cy.validarCampoNoBody(res, "_id");
         });
     });
     it("Realizar busca por carrinho com ID inválido", () => {
         cy.requestBuscaCarrinhoId("id_invalido_123456").then((res) => {            
-            expect(res.status).to.eq(400);  
-            expect(res.body.id).to.include('id deve ter exatamente 16 caracteres alfanuméricos');
+            cy.validarResposta(res, 400, "id", "id deve ter exatamente 16 caracteres alfanuméricos");
         });
     });
     it("Realizar busca por carrinho com ID não cadastrado", () => {
         cy.requestBuscaCarrinhoId("DQDT4ZOKwdLtcyJ9").then((res) => {            
-            expect(res.status).to.eq(400);  
-            expect(res.body.message).to.include('Carrinho não encontrado');
+            cy.validarResposta(res, 400, "message", "Carrinho não encontrado");
         });
     });
 })
