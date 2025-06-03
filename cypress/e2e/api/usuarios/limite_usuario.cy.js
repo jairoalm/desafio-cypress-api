@@ -1,4 +1,4 @@
-describe("Testar limite de taxas da API cadastrar usuário", () => {
+describe("Testar limite de taxas da API -> Cadastrar Usuário", () => {
 
   it("Valida limite real com requisições em alta velocidade", () => {
     const total = 300;

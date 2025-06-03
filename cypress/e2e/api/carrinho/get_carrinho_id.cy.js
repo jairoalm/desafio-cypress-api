@@ -1,4 +1,4 @@
-describe("Testes da API de Carrinhos - Realizar busca por carrinhos por ID", () => {
+describe("Testes da API de Carrinhos -> Realizar busca de Carrinhos por ID", () => {
     let produto = {};
     let user = {};
     let carrinho = {};
@@ -18,7 +18,7 @@ describe("Testes da API de Carrinhos - Realizar busca por carrinhos por ID", () 
         });
         cy.criarUsuarioProdutoECarrinho()
     });
-    it("Deve listar o primeiro carrinho", () => {
+    it("Deve listar o primeiro carrinho por ID", () => {
         cy.requestBuscaCarrinhoId(carrinho.id).then((res) => {
             const carrinho = res.body.produtos[0]
             cy.validarStatus(res, 200);

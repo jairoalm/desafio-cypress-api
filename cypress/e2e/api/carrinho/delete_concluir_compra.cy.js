@@ -1,4 +1,4 @@
-describe("Testes da API de Carrinho - Concluir Compra", () => {
+describe("Testes da API de Carrinhos -> Concluir Compra", () => {
     beforeEach(() => {
         cy.criarUsuarioProdutoECarrinho()
     })

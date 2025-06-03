@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-describe("Testes da API de Produtos - Cadastrar Produtos", () => {
+describe("Testes da API de Produtos -> Cadastrar Produtos", () => {
     beforeEach(() => {
        cy.login()
     });

@@ -1,6 +1,6 @@
 // cypress/e2e/api/users.cy.js
 
-describe("Testes da API de Usuários - Deletar Usuário", () => {
+describe("Testes da API de Usuários -> Deletar Usuário", () => {
     beforeEach(() => {
         cy.cadastrarNovoUsuario();
     });

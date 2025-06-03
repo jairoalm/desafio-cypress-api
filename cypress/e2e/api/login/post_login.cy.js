@@ -1,5 +1,5 @@
 
-describe("Testes da API de Usuários - Login", () => {
+describe("Testes da API de Usuários -> Login", () => {
     let user = {};
     before(() => {
         cy.createUser().then((res) => {

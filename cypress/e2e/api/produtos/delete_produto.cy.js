@@ -1,4 +1,4 @@
-describe("Testes da API de Produtos - Delete Produtos", () => {
+describe("Testes da API de Produtos -> Delete Produtos", () => {
     beforeEach(() => {
         cy.cadastrarNovoProduto()
     });

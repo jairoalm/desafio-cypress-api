@@ -1,5 +1,5 @@
 // cypress/e2e/api/users.cy.js
-describe("Testes da API de Usuários - Busca Usuários Por ID", () => {
+describe("Testes da API de Usuários -> Busca Usuários Por ID", () => {
     beforeEach(() => {
         cy.cadastrarNovoUsuario()
     });

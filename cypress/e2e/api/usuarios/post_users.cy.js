@@ -1,7 +1,7 @@
 // cypress/e2e/api/users.cy.js
 import { faker } from '@faker-js/faker';
 
-describe("Testes da API de Usuários - Cadastro de Usuários", () => {
+describe("Testes da API de Usuários -> Cadastro de Usuários", () => {
 
   it("Deve criar um novo usuário", () => {
     cy.createUser().then((res) => {
