@@ -5,7 +5,7 @@ describe("Testes da API de Produtos -> Cadastrar Produtos", () => {
        cy.login()
     });
     it("Deve criar um novo produto", () => {
-        cy.createProduct().then((res) => {
+        cy.createProduct({}, { timeout: 10000 }).then((res) => {
             cy.validarCampoNoBody(res, "message")
             cy.validarCampoNoBody(res, "_id")
             cy.validarResposta(res, 201, "message", "Cadastro realizado com sucesso")

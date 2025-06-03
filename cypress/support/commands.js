@@ -1,4 +1,3 @@
-import { faker } from '@faker-js/faker';
 Cypress.Commands.add("authHeader", () => {
     return {
         Authorization: Cypress.env("token"),

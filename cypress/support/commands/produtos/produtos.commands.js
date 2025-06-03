@@ -92,8 +92,11 @@ Cypress.Commands.add("cadastrarNovoProduto", () => {
                 produto.preco = resProd.requestBody.preco;
                 produto.descricao = resProd.requestBody.descricao;
                 produto.quantidade = resProd.requestBody.quantidade;
+                cy.log(JSON.stringify(produto));
+                cy.log(JSON.stringify(res.body));
 
                 cy.wrap(produto).as("produto");
+                return cy.wrap(produto);
             });
         })
     });

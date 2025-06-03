@@ -17,7 +17,6 @@ describe("Testes da API de Carrinhos -> Realizar busca por Carrinhos", () => {
             produto.quantidade = res.requestBody.quantidade;                        
             cy.requestAdicionarCarrinho(produto.id).then((res) => {
                 carrinho.id = res.body._id;
-                cy.log("id_carrinho", carrinho.id)
             });
         });
     });
@@ -50,7 +49,7 @@ describe("Testes da API de Carrinhos -> Realizar busca por Carrinhos", () => {
         cy.requestBuscaCarrinho({ quantidadeTotal: produto.quantidade }).then((res) => {
             cy.log(produto.quantidade)
             const carrinho = res.body.carrinhos[0]
-            ecy.validarStatus(res, 200);
+            cy.validarStatus(res, 200);
             expect(carrinho.quantidadeTotal).to.eql(Number(produto.quantidade));
         });
     });

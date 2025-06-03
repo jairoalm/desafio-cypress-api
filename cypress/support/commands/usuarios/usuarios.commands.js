@@ -7,7 +7,6 @@ Cypress.Commands.add("createUser", (override = {}) => {
         administrador: "true",
         ...override
     };
-
     return cy.request({
         method: "POST",
         url: "/usuarios",

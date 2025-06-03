@@ -55,9 +55,10 @@ O ServeRest é uma API REST gratuita que simula uma loja virtual com intuito de 
         - npm run cy:open ou npx cypress open
     - Modo headless (terminal)
         - npm run cy:headless ou npx cypress headless
-- Executar com arquivo especifico
-    - npm run cy:open --spec "cypress/e2e/<pasta>/<file_teste>.js
-    - npm run cy:headless --spec "cypress/e2e/<pasta>/<file_teste>.js
+- Executar pasta especifica
+    - npx cypress run --spec "cypress/e2e/api/<pasta>/**/*.cy.js"
+- Executar um arquivo especifico
+    - - npx cypress run --spec "cypress/e2e/api/<pasta>/<arquivo_teste>.cy.js"
 
 ```
 ## Gerar Relatórios

@@ -1,8 +1,7 @@
-import { faker } from "@faker-js/faker";
-
-describe("Testes da API de Produtos -> Buscar Produto por ID", () => {
+describe("Testes da API de Produtos -> Buscar Produto por Campos", () => {
     beforeEach(() => {
         cy.cadastrarNovoProduto()
+        cy.wrap(1000);
     });
     it("Deve buscar todos os produtos", () => {
         cy.buscarProduto({}).then((res) => {
@@ -94,7 +93,7 @@ describe("Testes da API de Produtos -> Buscar Produto por ID", () => {
     })
     it("Tentar buscar produto com quantidade não cadastrado", () => {
         const novaQtd = faker.commerce.price({ min: 100, max: 200, dec: 0 })
-        cy.buscarProduto({ quantidade: novaQtd }).then((res) => {
+        cy.buscarProduto({ quantidade: novaQtd }, { timeout: 10000 }).then((res) => {
             cy.validarStatus(res, 200);
             expect(res.body.quantidade).to.have.eql(0);
             expect(res.body).to.have.property("produtos").that.is.an("array").and.to.have.length(0);

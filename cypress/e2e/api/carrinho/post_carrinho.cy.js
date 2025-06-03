@@ -1,6 +1,8 @@
 describe("Testes da API de Carrinho -> Adicionar Carrinhos", () => {
     beforeEach(() => {
         cy.cadastrarNovoProduto()
+        cy.wrap(1000);
+        
     })
     it("Deve adicionar produto no carrinho", () => {
         cy.get("@produto").then((produto) => {

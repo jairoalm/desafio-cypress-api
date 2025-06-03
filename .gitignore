@@ -3,3 +3,4 @@ cypress/downloads/
 cypress/screenshots/
 cypress/videos/
 **.txt
+**allure-results/

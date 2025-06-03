@@ -1,6 +1,7 @@
 describe("Testes da API de Carrinhos -> Concluir Compra", () => {
     beforeEach(() => {
         cy.criarUsuarioProdutoECarrinho()
+        cy.wrap(1000)
     })
     it("Deve concluir a compra e carrinho ser excluído", () => {
         cy.requestConcluirCompraNoCarrinho().then((res) => {

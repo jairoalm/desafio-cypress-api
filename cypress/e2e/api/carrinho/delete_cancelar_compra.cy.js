@@ -14,7 +14,6 @@ describe("Testes da API de Carrinhos -> Cancelar Compra", () => {
             cy.requestAdicionarCarrinho(produtoId).then((res) => {
                 user = res;
                 const carrinhotId = user.body._id;
-                cy.log("id_carrinho", carrinhotId)
             });
         })
     })
@@ -24,7 +23,7 @@ describe("Testes da API de Carrinhos -> Cancelar Compra", () => {
         });
     });
     it("Tentar concluir a compra com usuário que não tem produtos no carrinho", () => {
-        cy.createUser().then((res) => {
+        cy.createUser().then(() => {
             cy.requestConcluirCompraNoCarrinho().then((res) => {
                 cy.validarResposta(res, 200, "message", "Não foi encontrado carrinho para esse usuário");
             });

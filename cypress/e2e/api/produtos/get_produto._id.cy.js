@@ -1,6 +1,7 @@
-describe("Testes da API de Produtos -> Buscar Produtos Por Campos ", () => {
+describe("Testes da API de Produtos -> Buscar Produtos Por ID ", () => {
     beforeEach(() => {
         cy.cadastrarNovoProduto()
+        cy.wrap(1000)
     });
     it("Deve buscar por ID do produto e validar propriedade do responde body", () => {
         cy.get("@produto").then((produto) => {

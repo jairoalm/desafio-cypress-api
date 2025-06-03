@@ -3,10 +3,12 @@ import { faker } from '@faker-js/faker';
 
 describe("Testes da API de Produtos -> Editar Produto", () => {
     beforeEach(() => {
-        cy.cadastrarNovoProduto()
+        cy.cadastrarNovoProduto();
+        cy.wait(2000);
     });
     it("Deve atualizar apenas o nome do produto", () => {
         cy.get("@produto").then((produto) => {
+            expect(produto.id).to.exist;
             const novoNome = faker.commerce.productName();
             cy.updateProdutoId(produto.id, { nome: novoNome }).then((res) => {
                 cy.validarCampoNoBody(res, "message")
@@ -16,7 +18,8 @@ describe("Testes da API de Produtos -> Editar Produto", () => {
     });
     it("Deve atualizar apenas o preco do produto", () => {
         cy.get("@produto").then((produto) => {
-            const novoPreco = faker.commerce.price({ min: 100, max: 200, dec: 0 })
+            expect(produto.id).to.exist;
+            const novoPreco = Number(faker.commerce.price({ min: 10, max: 100, dec: 0 }));
             cy.updateProdutoId(produto.id, { preco: novoPreco }).then((res) => {
                 cy.validarResposta(res, 200, "message", "Registro alterado com sucesso")
             });
@@ -24,6 +27,7 @@ describe("Testes da API de Produtos -> Editar Produto", () => {
     });
     it("Deve atualizar apenas descrição do produto", () => {
         cy.get("@produto").then((produto) => {
+            expect(produto.id).to.exist;
             const novaDescricao = faker.commerce.productDescription();
             cy.updateProdutoId(produto.id, { descricao: novaDescricao }).then((res) => {
                 cy.validarResposta(res, 200, "message", "Registro alterado com sucesso")
@@ -32,7 +36,8 @@ describe("Testes da API de Produtos -> Editar Produto", () => {
     });
     it("Deve atualizar apenas a quantidade do produto", () => {
         cy.get("@produto").then((produto) => {
-            const novaQuantidade = faker.commerce.price({ min: 100, max: 200, dec: 0 })
+            expect(produto.id).to.exist;
+            const novaQuantidade = Number(faker.commerce.price({ min: 10, max: 100, dec: 0 }));
             cy.updateProdutoId(produto.id, { quantidade: novaQuantidade }).then((res) => {
                 cy.validarResposta(res, 200, "message", "Registro alterado com sucesso")
             });

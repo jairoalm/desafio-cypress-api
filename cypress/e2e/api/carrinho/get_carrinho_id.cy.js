@@ -13,7 +13,6 @@ describe("Testes da API de Carrinhos -> Realizar busca de Carrinhos por ID", () 
             produto.id = res.body._id;                                
             cy.requestAdicionarCarrinho(produto.id).then((res) => {
                 carrinho.id = res.body._id;
-                cy.log("id_carrinho", carrinho.id)
             });
         });
         cy.criarUsuarioProdutoECarrinho()

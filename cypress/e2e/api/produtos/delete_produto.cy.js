@@ -1,6 +1,7 @@
 describe("Testes da API de Produtos -> Delete Produtos", () => {
     beforeEach(() => {
         cy.cadastrarNovoProduto()
+        cy.wrap(1000);
     });
     it("Tentar excluir produto que esteja adicionado ao carrinho", () => {
         cy.get("@produto").then((produto) => {
