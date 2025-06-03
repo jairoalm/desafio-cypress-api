@@ -1,7 +1,8 @@
+import { faker } from '@faker-js/faker';
 describe("Testes da API de Produtos -> Buscar Produto por Campos", () => {
     beforeEach(() => {
         cy.cadastrarNovoProduto()
-        cy.wrap(1000);
+        cy.wrap(2000);
     });
     it("Deve buscar todos os produtos", () => {
         cy.buscarProduto({}).then((res) => {
